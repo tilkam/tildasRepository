@@ -15,8 +15,8 @@ public class MainMenuScreen implements Screen {
     final JumpyBirb game;
 
     OrthographicCamera camera;
-    private Texture bg;
-    private Texture playButton;
+    private Texture bg, playButton;
+
 
     public MainMenuScreen(final JumpyBirb game) {
         this.game = game;

@@ -6,19 +6,24 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import se.yrgo.JumpyBirb;
 import se.yrgo.sprites.Bird;
+import se.yrgo.sprites.Tube;
 
 public class GameScreen implements Screen {
-
+    private static final int TUBE_SPACING = 125;
+    private static final int TUBE_COUNT = 4;
     final JumpyBirb game;
     private Bird bird;
 
     OrthographicCamera camera;
     private Texture bg;
     private Texture ground;
+    private Tube tube;
 
+    private Array<Tube> tubes;
 
     public GameScreen(JumpyBirb game) {
         this.game = game;
@@ -26,6 +31,13 @@ public class GameScreen implements Screen {
         camera = new OrthographicCamera();
         bg = new Texture("bg.png");
         ground = new Texture("ground.png");
+        tube = new Tube(100);
+        tubes = new Array<>();
+
+        for (int i = 0; i < TUBE_COUNT; i++) {
+            tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
+            
+        }
 
 
     }
@@ -41,7 +53,13 @@ public class GameScreen implements Screen {
         game.batch.begin();
         game.batch.draw(bg, camera.position.x - (camera.viewportWidth/ 2), 0);
         game.batch.draw(ground, camera.position.x - (camera.viewportWidth/2),0);
-        game.font.draw(game.batch, "GAME SCREEN - PRESS MOUSE TO END", JumpyBirb.WIDTH/2, JumpyBirb.HEIGHT/2);
+        game.batch.draw(tube.getTopTube(), tube.getPosTopTube().x, tube.getPosTopTube().y);
+        game.batch.draw(tube.getBottomTube(), tube.getPosBottomTube().x, tube.getPosBottomTube().y);
+        for(Tube tube : tubes){
+            if(camera.position.x - (camera.viewportWidth/2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()){
+                tube.reposition(tube.getPosTopTube().x + ((tube.TUBE_WIDTH +TUBE_SPACING) * TUBE_COUNT));
+            }
+        }
         bird.update(delta);
         game.batch.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
         game.batch.end();
