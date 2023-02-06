@@ -1,6 +1,7 @@
 package se.yrgo.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 public class Bird {
@@ -10,6 +11,7 @@ public class Bird {
     private Vector3 velocity;
 
     private Texture bird;
+    private Rectangle bounds;
 
     public Bird(int x, int y){
         //startposition
@@ -18,6 +20,8 @@ public class Bird {
         velocity = new Vector3(0,0,0);
         //lägg in bilden vi ska ha
         bird = new Texture("bird.png");
+        //För collision
+        bounds = new Rectangle(x,y, bird.getWidth(), bird.getHeight());
     }
 
     public void update(float dt){
@@ -32,6 +36,7 @@ public class Bird {
         if( position.y < 0)
             position.y = 0;
         velocity.scl(1/dt);
+        bounds.setPosition(position.x, position.y);
 
 
     }
@@ -46,6 +51,9 @@ public class Bird {
 
     public void jump(){
         velocity.y = 150;
+    }
+    public Rectangle getBounds(){
+        return bounds;
     }
 
 

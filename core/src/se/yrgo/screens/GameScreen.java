@@ -67,11 +67,15 @@ public class GameScreen implements Screen {
         }
 
         bird.update(delta);
-        camera.position.x = bird.getPosition().x;
+        camera.position.x = bird.getPosition().x + 80;
         camera.update();
         for (Tube tube : tubes) {
             if (camera.position.x - (camera.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()) {
                 tube.reposition(tube.getPosTopTube().x + ((tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+            }
+            if(tube.collides(bird.getBounds())){
+                game.setScreen(new EndScreen(game));
+
             }
         }
         camera.update();
@@ -82,10 +86,6 @@ public class GameScreen implements Screen {
             bird.jump();
         }
 
-        if (Gdx.input.isTouched()) {
-            game.setScreen(new EndScreen(game));
-            dispose();
-        }
 
 
     }
@@ -113,6 +113,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        bg.dispose();
+        ground.dispose();
     }
 }

@@ -12,12 +12,14 @@ import se.yrgo.JumpyBirb;
 public class EndScreen implements Screen {
     final JumpyBirb game;
     OrthographicCamera camera;
-    private Texture bg;
+    private Texture bg, gameOver;
 
     public EndScreen(final JumpyBirb game) {
         this.game = game;
         camera = new OrthographicCamera();
+        camera.setToOrtho(false, 288,512);
         bg = new Texture("bg.png");
+        gameOver = new Texture("gameOver.png");
     }
 
     @Override
@@ -27,20 +29,22 @@ public class EndScreen implements Screen {
 
     @Override
    public void render(float delta) {
-
         ScreenUtils.clear(Color.ORANGE);
+        camera.update();
+        game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(bg, camera.position.x - (camera.viewportWidth/ 2), 0);
-        game.font.draw(game.batch, "END SCREEN PRESS SPACE TO PLAY AGAIN", 200,200);
+        //game.font.draw(game.batch, "END SCREEN PRESS SPACE TO PLAY AGAIN", 200,200);
         game.batch.end();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+        if (Gdx.input.isTouched()) {
             game.setScreen(new GameScreen(game));
             dispose();
 
-        }else if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
-            Gdx.app.exit();
         }
+        //else if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
+        //    Gdx.app.exit();
+        //}
 
     }
 
