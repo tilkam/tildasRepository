@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import se.yrgo.JumpyBirb;
 import se.yrgo.sprites.Bird;
@@ -15,11 +16,16 @@ public class GameScreen implements Screen {
     private Bird bird;
 
     OrthographicCamera camera;
+    private Texture bg;
+    private Texture ground;
+
 
     public GameScreen(JumpyBirb game) {
         this.game = game;
         bird = new Bird(50,300);
         camera = new OrthographicCamera();
+        bg = new Texture("bg.png");
+        ground = new Texture("ground.png");
 
 
     }
@@ -33,7 +39,9 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(Color.BLACK);
 
         game.batch.begin();
-        game.font.draw(game.batch, "GAME SCREEN - PRESS MOUSE TO END", JumpyBirb.WIDTH/2.0f, JumpyBirb.HEIGHT/2.0f);
+        game.batch.draw(bg, camera.position.x - (camera.viewportWidth/ 2), 0);
+        game.batch.draw(ground, camera.position.x - (camera.viewportWidth/2),0);
+        game.font.draw(game.batch, "GAME SCREEN - PRESS MOUSE TO END", JumpyBirb.WIDTH/2, JumpyBirb.HEIGHT/2);
         bird.update(delta);
         game.batch.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
         game.batch.end();

@@ -1,23 +1,26 @@
 package se.yrgo;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import se.yrgo.screens.MainMenuScreen;
 
 public class JumpyBirb extends Game {
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 600;
-
+	public static final int WIDTH = 288;
+	public static final int HEIGHT = 512;
 
 	public SpriteBatch batch;
 	public BitmapFont font;
+
+
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		this.setScreen(new MainMenuScreen(this));
+
 	}
 
 	@Override

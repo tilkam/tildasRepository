@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import se.yrgo.JumpyBirb;
 
@@ -14,10 +15,14 @@ public class MainMenuScreen implements Screen {
     final JumpyBirb game;
 
     OrthographicCamera camera;
+    private Texture bg;
+    private Texture playButton;
 
     public MainMenuScreen(final JumpyBirb game) {
         this.game = game;
         camera = new OrthographicCamera();
+        bg = new Texture("bg.png");
+        playButton = new Texture("playbtn.png");
     }
 
 
@@ -33,7 +38,9 @@ public class MainMenuScreen implements Screen {
 
 
         game.batch.begin();
-        game.font.draw(game.batch, "MAIN MENU SCREEN", JumpyBirb.WIDTH/2.0f, JumpyBirb.HEIGHT/2.0f);
+        game.batch.draw(bg, camera.position.x - (camera.viewportWidth/ 2), 0);
+        game.batch.draw(playButton, JumpyBirb.WIDTH/2 - 50, JumpyBirb.HEIGHT/2);
+        game.font.draw(game.batch, "MAIN MENU SCREEN", JumpyBirb.WIDTH/2.0f - 50, JumpyBirb.HEIGHT/2.0f);
         game.batch.end();
 
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
