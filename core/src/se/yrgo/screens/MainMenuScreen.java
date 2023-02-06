@@ -21,6 +21,7 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(final JumpyBirb game) {
         this.game = game;
         camera = new OrthographicCamera();
+        camera.setToOrtho(false, 288,512);
         bg = new Texture("bg.png");
         playButton = new Texture("playbtn.png");
     }
@@ -35,7 +36,8 @@ public class MainMenuScreen implements Screen {
     public void render(float delta) {
 
         ScreenUtils.clear(Color.FOREST,true);
-
+        camera.update();
+        game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
         game.batch.draw(bg, camera.position.x - (camera.viewportWidth/ 2), 0);

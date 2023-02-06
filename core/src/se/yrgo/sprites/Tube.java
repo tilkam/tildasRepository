@@ -23,6 +23,7 @@ public class Tube {
     posBottomTube = new Vector2(x, posTopTube.y - TUBE_GAP - bottomTube.getHeight());
     }
 
+
     public Texture getTopTube() {
         return topTube;
     }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector3;
 
 public class Bird {
     private static final int GRAVITY = -15;
+    private static final int MOVEMENT = 100;
     private Vector3 position;
     private Vector3 velocity;
 
@@ -23,7 +24,11 @@ public class Bird {
         if(position.y > 0)
             velocity.add(0,GRAVITY,0);
         velocity.scl(dt);
-        position.add(0,velocity.y, 0);
+        //Framåt
+        position.add(MOVEMENT * dt,velocity.y, 0);
+
+        //Bara upp och ner
+        position.add(0, velocity.y, 0);
         if( position.y < 0)
             position.y = 0;
         velocity.scl(1/dt);
@@ -40,7 +45,7 @@ public class Bird {
     }
 
     public void jump(){
-        velocity.y = 250;
+        velocity.y = 150;
     }
 
 
