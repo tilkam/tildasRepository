@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import se.yrgo.JumpyBirb;
@@ -28,7 +29,7 @@ public class MainMenuScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        ScreenUtils.clear(0, 1, 1, 1);
+        ScreenUtils.clear(Color.FOREST,true);
 
 
         game.batch.begin();

@@ -2,6 +2,7 @@ package se.yrgo.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import se.yrgo.JumpyBirb;
@@ -25,7 +26,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(1,2,3,1);
+        ScreenUtils.clear(Color.BLACK);
 
         game.batch.begin();
         game.font.draw(game.batch, "GAME SCREEN - PRESS MOUSE TO END", JumpyBirb.WIDTH/2.0f, JumpyBirb.HEIGHT/2.0f);
