@@ -34,6 +34,7 @@ public class EndScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(bg, camera.position.x - (camera.viewportWidth/ 2), 0);
+        game.batch.draw(gameOver, JumpyBirb.WIDTH / 2 - 95 , JumpyBirb.HEIGHT/ 2);
         //game.font.draw(game.batch, "END SCREEN PRESS SPACE TO PLAY AGAIN", 200,200);
         game.batch.end();
 
@@ -43,7 +44,7 @@ public class EndScreen implements Screen {
 
         }
         //else if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
-        //    Gdx.app.exit();
+         //   Gdx.app.exit();
         //}
 
     }

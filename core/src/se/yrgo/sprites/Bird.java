@@ -1,6 +1,7 @@
 package se.yrgo.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
@@ -12,6 +13,7 @@ public class Bird {
 
     private Texture bird;
     private Rectangle bounds;
+    private Animation birdAnimation;
 
     public Bird(int x, int y){
         //startposition
@@ -19,12 +21,19 @@ public class Bird {
         //not moving
         velocity = new Vector3(0,0,0);
         //lägg in bilden vi ska ha
-        bird = new Texture("bird.png");
+        //bird = new Texture("bird.png");
+
+        //texture ersätter nu bird som vi använde ovan förut
+        Texture texture = new Texture("birdanimation.png");
+        birdAnimation= new Animation(new TextureRegion(texture),3, 0.5f);
         //För collision
-        bounds = new Rectangle(x,y, bird.getWidth(), bird.getHeight());
+        //texture.getWidth/3 är för att vi har 3 frames (3 olika bilder som loopas i animationen)
+        bounds = new Rectangle(x,y, texture.getWidth() / 3, texture.getHeight());
+
     }
 
     public void update(float dt){
+        birdAnimation.update(dt);
         if(position.y > 0)
             velocity.add(0,GRAVITY,0);
         velocity.scl(dt);
@@ -45,12 +54,12 @@ public class Bird {
         return position;
     }
 
-    public Texture getTexture() {
-        return bird;
+    public TextureRegion getTexture() {
+        return birdAnimation.getFrame();
     }
 
     public void jump(){
-        velocity.y = 150;
+        velocity.y = 130;
     }
     public Rectangle getBounds(){
         return bounds;
